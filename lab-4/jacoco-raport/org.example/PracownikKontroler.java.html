@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PracownikKontroler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mpr1</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">PracownikKontroler.java</span></div><h1>PracownikKontroler.java</h1><pre class="source lang-java linenums">package org.example;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+<span class="nc" id="L9">public class PracownikKontroler {</span>
+<span class="nc" id="L10">    private final Map&lt;String, Pracownik&gt; pracownicy = new HashMap&lt;&gt;();</span>
+
+    public void dodaj(Pracownik pracownik) {
+<span class="nc" id="L13">        String email = pracownik.getEmail();</span>
+
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if(pracownicy.containsKey(email)) {</span>
+<span class="nc" id="L16">            System.out.println(&quot;istnieje juz pracownik z takim eamilem&quot;);</span>
+<span class="nc" id="L17">            return;</span>
+        }
+
+<span class="nc" id="L20">        pracownicy.put(email, pracownik);</span>
+<span class="nc" id="L21">    }</span>
+
+    public List&lt;Pracownik&gt; wszyscy() {
+<span class="nc" id="L24">        return List.copyOf(pracownicy.values());</span>
+    }
+
+    public List&lt;Pracownik&gt; wszyscyWFirmie(String firma) {
+<span class="nc" id="L28">        List&lt;Pracownik&gt; pracownicy = new ArrayList&lt;&gt;();</span>
+
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        for(Pracownik pracownik : wszyscy()) {</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            if(pracownik.getNazwaFirmy().equals(firma)) {</span>
+<span class="nc" id="L32">                pracownicy.add(pracownik);</span>
+            }
+<span class="nc" id="L34">        }</span>
+
+<span class="nc" id="L36">        return pracownicy;</span>
+    }
+
+    public Map&lt;Stanowisko, List&lt;Pracownik&gt;&gt; wszyscyGrupowaniePoStanowisku() {
+<span class="nc" id="L40">        Map&lt;Stanowisko, List&lt;Pracownik&gt;&gt; map = new HashMap&lt;&gt;();</span>
+
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        for(Pracownik pracownik : wszyscy()) {</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">            if(map.containsKey(pracownik.getStanowisko())) {</span>
+<span class="nc" id="L44">                map.get(pracownik.getStanowisko()).add(pracownik);</span>
+            } else {
+<span class="nc" id="L46">                map.put(pracownik.getStanowisko(), new ArrayList&lt;&gt;());</span>
+<span class="nc" id="L47">                map.get(pracownik.getStanowisko()).add(pracownik);</span>
+            }
+<span class="nc" id="L49">        }</span>
+
+<span class="nc" id="L51">        return map;</span>
+    }
+
+    public Map&lt;Stanowisko, Integer&gt; zliczPracownikowNaStanowiskach() {
+<span class="nc" id="L55">        Map&lt;Stanowisko, Integer&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc bnc" id="L56" title="All 2 branches missed.">        for(Pracownik pracownik : wszyscy()) {</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">            if(map.containsKey(pracownik.getStanowisko())) {</span>
+<span class="nc" id="L58">                map.replace(pracownik.getStanowisko(), map.get(pracownik.getStanowisko())+1);</span>
+            } else {
+<span class="nc" id="L60">                map.put(pracownik.getStanowisko(), 1);</span>
+            }
+<span class="nc" id="L62">        }</span>
+
+<span class="nc" id="L64">        return map;</span>
+    }
+
+    public Pracownik znajdzNajlepiejZarabiajacego() {
+<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (pracownicy.isEmpty()) {</span>
+<span class="nc" id="L69">            return null;</span>
+        }
+<span class="nc" id="L71">        Pracownik najlepszy = (Pracownik) pracownicy.values().toArray()[0];</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        for (Pracownik p : pracownicy.values()) {</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            if (p.getStanowisko().getPensja() &gt; najlepszy.getStanowisko().getPensja()) {</span>
+<span class="nc" id="L74">                najlepszy = p;</span>
+            }
+<span class="nc" id="L76">        }</span>
+<span class="nc" id="L77">        return najlepszy;</span>
+    }
+
+    public List&lt;Pracownik&gt; pracownicyPosortowaniPoNazwisku() {
+<span class="nc" id="L81">        List&lt;Pracownik&gt; posortowani = new ArrayList&lt;&gt;(pracownicy.values());</span>
+<span class="nc" id="L82">        posortowani.sort(new Comparator&lt;Pracownik&gt;() {</span>
+            @Override
+            public int compare(Pracownik p1, Pracownik p2) {
+<span class="nc" id="L85">                return pobierzNazwisko(p1.getImieNazwisko()).compareToIgnoreCase(pobierzNazwisko(p2.getImieNazwisko()));</span>
+            }
+        });
+<span class="nc" id="L88">        return posortowani;</span>
+    }
+
+    private static String pobierzNazwisko(String imieNazwisko) {
+<span class="nc" id="L92">        String[] tab = imieNazwisko.split(&quot; &quot;);</span>
+<span class="nc" id="L93">        return tab[tab.length - 1];</span>
+    }
+
+    public double obliczSrednieWynagrodzenie() {
+<span class="nc bnc" id="L97" title="All 2 branches missed.">        if (pracownicy.isEmpty()) {</span>
+<span class="nc" id="L98">            return 0.0;</span>
+        }
+
+<span class="nc" id="L101">        double suma = 0.0;</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        for (Pracownik pracownik : pracownicy.values()) {</span>
+<span class="nc" id="L103">            suma += pracownik.getStanowisko().getPensja();</span>
+<span class="nc" id="L104">        }</span>
+
+<span class="nc" id="L106">        return suma / pracownicy.size();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

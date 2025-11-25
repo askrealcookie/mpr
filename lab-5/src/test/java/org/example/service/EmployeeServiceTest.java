@@ -1,8 +1,8 @@
 package org.example.service;
 
-import org.example.model.CompanyStatistics;
 import org.example.model.Employee;
 import org.example.model.Position;
+import org.example.model.CompanyStatistics;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Testy klasy EmployeeService")
+@DisplayName("Testy EmployeeService")
 class EmployeeServiceTest {
 
     private EmployeeService employeeService;
@@ -27,7 +27,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Powinien dodawać nowego pracownika do systemu")
     void shouldAddNewEmployee() {
         // Arrange
         Employee employee = emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 9000);
@@ -42,7 +41,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Wyszukiwanie po firmie powinno zwrócić tylko pracowników z tej firmy")
     void shouldFindEmployeesByCompany() {
         // Arrange
         employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 9000));
@@ -60,7 +58,19 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Sortowanie po nazwisku powinno zwrócić listę w kolejności alfabetycznej")
+    void shouldReturnEmptyListForUnknownCompany() {
+        // Arrange
+        employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 9000));
+
+        // Act
+        List<Employee> result = employeeService.findByCompany("NieIstnieje");
+
+        // Assert
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
     void shouldSortEmployeesByLastName() {
         // Arrange
         employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 9000));
@@ -77,7 +87,16 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Grupowanie po stanowisku powinno prawidłowo przypisać pracowników")
+    void shouldReturnEmptyListWhenSortingEmptyList() {
+        // Act
+        List<Employee> sorted = employeeService.sortByLastName();
+
+        // Assert
+        assertNotNull(sorted);
+        assertTrue(sorted.isEmpty());
+    }
+
+    @Test
     void shouldGroupEmployeesByPosition() {
         // Arrange
         employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 9000));
@@ -96,7 +115,16 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Zliczanie po stanowisku powinno zwrócić poprawne wartości")
+    void shouldReturnEmptyMapWhenGroupingEmptyList() {
+        // Act
+        Map<Position, List<Employee>> grouped = employeeService.groupByPosition();
+
+        // Assert
+        assertNotNull(grouped);
+        assertTrue(grouped.isEmpty());
+    }
+
+    @Test
     void shouldCountEmployeesByPosition() {
         // Arrange
         employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 9000));
@@ -115,7 +143,16 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Powinien poprawnie wyliczyć średnie wynagrodzenie")
+    void shouldReturnEmptyMapWhenCountingEmptyList() {
+        // Act
+        Map<Position, Long> counts = employeeService.countByPosition();
+
+        // Assert
+        assertNotNull(counts);
+        assertTrue(counts.isEmpty());
+    }
+
+    @Test
     void shouldCalculateAverageSalary() {
         // Arrange
         employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 8000));
@@ -129,7 +166,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Średnie wynagrodzenie dla pustej listy powinno być równe 0")
     void shouldReturnZeroAverageForEmptyList() {
         // Act
         double average = employeeService.getAverageSalary();
@@ -139,7 +175,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Powinien zwrócić pracownika z najwyższą pensją")
     void shouldReturnTopEarner() {
         // Arrange
         Employee e1 = emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 8000);
@@ -157,7 +192,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("Powinien zwrócić null jako top earner dla pustej listy")
     void shouldReturnNullTopEarnerForEmptyList() {
         // Act
         Employee top = employeeService.getTopEarner();
@@ -167,7 +201,6 @@ class EmployeeServiceTest {
     }
 
     @Test
-    @DisplayName("validateSalaryConsistency powinno zwrócić pracowników poniżej pensji bazowej")
     void shouldReturnEmployeesWithInconsistentSalary() {
         // Arrange
         employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 7000)); // za mało
@@ -180,6 +213,30 @@ class EmployeeServiceTest {
         assertAll(
                 () -> assertEquals(1, inconsistent.size()),
                 () -> assertEquals("jan@example.com", inconsistent.get(0).getEmail())
+        );
+    }
+
+    @Test
+    void shouldBuildCompanyStatistics() {
+        // Arrange
+        employeeService.addEmployee(emp("Jan", "Kowalski", "jan@example.com", "TechCorp", Position.Programista, 8000));
+        employeeService.addEmployee(emp("Anna", "Nowak", "anna@example.com", "TechCorp", Position.Manager, 12000));
+        employeeService.addEmployee(emp("Piotr", "Zielinski", "piotr@example.com", "OtherCorp", Position.Stazysta, 3000));
+
+        // Act
+        Map<String, CompanyStatistics> stats = employeeService.getCompanyStatistics();
+
+        // Assert
+        CompanyStatistics techStats = stats.get("TechCorp");
+        CompanyStatistics otherStats = stats.get("OtherCorp");
+
+        assertAll(
+                () -> assertEquals(2, techStats.getEmployeeCount()),
+                () -> assertEquals(10000.0, techStats.getAverageSalary(), 0.001),
+                () -> assertEquals("Anna Nowak", techStats.getTopEarnerFullName()),
+                () -> assertEquals(1, otherStats.getEmployeeCount()),
+                () -> assertEquals(3000.0, otherStats.getAverageSalary(), 0.001),
+                () -> assertEquals("Piotr Zielinski", otherStats.getTopEarnerFullName())
         );
     }
 }

@@ -9,6 +9,25 @@ public class Employee {
     private double salary;
 
     public Employee(String firstName, String lastName, String email, String companyName, Position position,  double salary) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Imię nie może być puste");
+        }
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwisko nie może być puste");
+        }
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email nie może być pusty");
+        }
+        if (companyName == null || companyName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwa firmy nie może być pusta");
+        }
+        if (position == null) {
+            throw new IllegalArgumentException("Stanowisko nie może być null");
+        }
+        if (salary <= 0) {
+            throw new IllegalArgumentException("Wynagrodzenie musi być dodatnie");
+        }
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -26,10 +45,16 @@ public class Employee {
     }
 
     public void setFirstName(String firstName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Imię nie może być puste");
+        }
         this.firstName = firstName;
     }
 
     public void setLastName(String lastName) {
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwisko nie może być puste");
+        }
         this.lastName = lastName;
     }
 
@@ -38,6 +63,9 @@ public class Employee {
     }
 
     public void setEmail(String email) {
+        if (email == null || email.trim().isEmpty()) {
+            throw new IllegalArgumentException("Email nie może być pusty");
+        }
         this.email = email;
     }
 
@@ -46,6 +74,9 @@ public class Employee {
     }
 
     public void setCompanyName(String companyName) {
+        if (companyName == null || companyName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Nazwa firmy nie może być pusta");
+        }
         this.companyName = companyName;
     }
 
@@ -54,6 +85,9 @@ public class Employee {
     }
 
     public void setPosition(Position position) {
+        if (position == null) {
+            throw new IllegalArgumentException("Stanowisko nie może być null");
+        }
         this.position = position;
     }
 
@@ -62,6 +96,9 @@ public class Employee {
     }
 
     public void setSalary(double salary) {
+        if (salary <= 0) {
+            throw new IllegalArgumentException("Wynagrodzenie musi być dodatnie");
+        }
         this.salary = salary;
     }
 

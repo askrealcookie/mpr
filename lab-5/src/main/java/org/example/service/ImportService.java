@@ -2,10 +2,10 @@ package org.example.service;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.example.exception.InvalidDataException;
 import org.example.model.Employee;
 import org.example.model.Position;
 import org.example.model.ImportSummary;
-import org.example.exception.InvalidDataException;
 
 import java.io.FileReader;
 import java.io.IOException;

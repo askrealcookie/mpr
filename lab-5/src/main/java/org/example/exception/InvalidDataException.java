@@ -1,7 +1,13 @@
 package org.example.exception;
 
 public class InvalidDataException extends Exception {
+
     private final int lineNumber;
+
+    public InvalidDataException(String message) {
+        super(message);
+        this.lineNumber = 0;
+    }
 
     public InvalidDataException(String message, int lineNumber) {
         super(message);
@@ -12,3 +18,4 @@ public class InvalidDataException extends Exception {
         return lineNumber;
     }
 }
+

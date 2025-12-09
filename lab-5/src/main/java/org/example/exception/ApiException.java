@@ -8,4 +8,9 @@ public class ApiException extends Exception {
     public ApiException(String message, Throwable cause) {
         super(message, cause);
     }
+
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
 }

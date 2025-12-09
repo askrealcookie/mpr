@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Employee.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mpr1</a> &gt; <a href="index.source.html" class="el_package">org.example.model</a> &gt; <span class="el_source">Employee.java</span></div><h1>Employee.java</h1><pre class="source lang-java linenums">package org.example.model;
+
+public class Employee {
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String companyName;
+    private Position position;
+    private double salary;
+
+<span class="fc" id="L11">    public Employee(String firstName, String lastName, String email, String companyName, Position position,  double salary) {</span>
+<span class="fc" id="L12">        this.firstName = firstName;</span>
+<span class="fc" id="L13">        this.lastName = lastName;</span>
+<span class="fc" id="L14">        this.email = email;</span>
+<span class="fc" id="L15">        this.companyName = companyName;</span>
+<span class="fc" id="L16">        this.position = position;</span>
+<span class="fc" id="L17">        this.salary = salary;</span>
+<span class="fc" id="L18">    }</span>
+
+    public String getFirstName() {
+<span class="fc" id="L21">        return firstName;</span>
+    }
+
+    public String getLastName() {
+<span class="fc" id="L25">        return lastName;</span>
+    }
+
+    public void setFirstName(String firstName) {
+<span class="fc" id="L29">        this.firstName = firstName;</span>
+<span class="fc" id="L30">    }</span>
+
+    public void setLastName(String lastName) {
+<span class="fc" id="L33">        this.lastName = lastName;</span>
+<span class="fc" id="L34">    }</span>
+
+    public String getEmail() {
+<span class="fc" id="L37">        return email;</span>
+    }
+
+    public void setEmail(String email) {
+<span class="fc" id="L41">        this.email = email;</span>
+<span class="fc" id="L42">    }</span>
+
+    public String getCompanyName() {
+<span class="fc" id="L45">        return companyName;</span>
+    }
+
+    public void setCompanyName(String companyName) {
+<span class="fc" id="L49">        this.companyName = companyName;</span>
+<span class="fc" id="L50">    }</span>
+
+    public Position getPosition() {
+<span class="fc" id="L53">        return position;</span>
+    }
+
+    public void setPosition(Position position) {
+<span class="fc" id="L57">        this.position = position;</span>
+<span class="fc" id="L58">    }</span>
+
+    public double getSalary() {
+<span class="fc" id="L61">        return salary;</span>
+    }
+
+    public void setSalary(double salary) {
+<span class="fc" id="L65">        this.salary = salary;</span>
+<span class="fc" id="L66">    }</span>
+
+    public String getFullName() {
+<span class="fc" id="L69">        return firstName + &quot; &quot; + lastName;</span>
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+<span class="fc bfc" id="L74" title="All 2 branches covered.">        if(obj instanceof Employee p){</span>
+<span class="fc" id="L75">            return p.email.equals(this.email);</span>
+        }
+
+<span class="fc" id="L78">        return false;</span>
+    }
+
+    @Override
+    public int hashCode() {
+<span class="fc" id="L83">        return this.email.hashCode();</span>
+    }
+
+    @Override
+    public String toString() {
+<span class="fc" id="L88">        StringBuilder sb = new StringBuilder(&quot;Pracownik(&quot;);</span>
+<span class="fc" id="L89">        sb.append(&quot;name:&quot;).append(firstName).append(&quot;, &quot;).append(lastName);</span>
+<span class="fc" id="L90">        sb.append(&quot;, email:&quot;).append(email);</span>
+<span class="fc" id="L91">        sb.append(&quot;, nazwaFirmy:&quot;).append(companyName);</span>
+<span class="fc" id="L92">        sb.append(&quot;, stanowisko:&quot;).append(position);</span>
+<span class="fc" id="L93">        sb.append(')');</span>
+<span class="fc" id="L94">        return sb.toString();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

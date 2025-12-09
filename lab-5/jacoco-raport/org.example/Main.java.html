@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mpr1</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package org.example;
+
+import org.example.model.CompanyStatistics;
+import org.example.model.Employee;
+import org.example.model.ImportSummary;
+import org.example.service.ApiService;
+import org.example.service.EmployeeService;
+import org.example.service.ImportService;
+import org.example.exception.ApiException;
+
+import java.util.List;
+import java.util.Map;
+
+<span class="nc" id="L14">public class Main {</span>
+    public static void main(String[] args) {
+<span class="nc" id="L16">        EmployeeService employeeService = new EmployeeService();</span>
+<span class="nc" id="L17">        ImportService importService = new ImportService(employeeService);</span>
+<span class="nc" id="L18">        ApiService apiService = new ApiService();</span>
+
+<span class="nc" id="L20">        System.out.println(&quot;importowanie pracowników z pliku CSV:&quot;);</span>
+<span class="nc" id="L21">        ImportSummary importSummary = importService.importFromCsv(&quot;src/main/resources/employees.csv&quot;);</span>
+<span class="nc" id="L22">        System.out.println(&quot;Zaimportowano pracowników: &quot; + importSummary.getImportedCount());</span>
+<span class="nc" id="L23">        System.out.println(&quot;bledy importu:&quot;);</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        for (ImportSummary.ImportError error : importSummary.getErrors()) {</span>
+<span class="nc" id="L25">            System.out.println(error);</span>
+<span class="nc" id="L26">        }</span>
+<span class="nc" id="L27">        System.out.println();</span>
+
+<span class="nc" id="L29">        System.out.println(&quot;Pobieranie pracowników z api&quot;);</span>
+        try {
+<span class="nc" id="L31">            List&lt;Employee&gt; apiEmployees = apiService.fetchEmployeesFromApi();</span>
+<span class="nc bnc" id="L32" title="All 2 branches missed.">            for (Employee employee : apiEmployees) {</span>
+<span class="nc" id="L33">                employeeService.addEmployee(employee);</span>
+<span class="nc" id="L34">            }</span>
+<span class="nc" id="L35">            System.out.println(&quot;Pobrano &quot; + apiEmployees.size() + &quot; pracowników z API&quot;);</span>
+<span class="nc" id="L36">        } catch (ApiException e) {</span>
+<span class="nc" id="L37">            System.out.println(&quot;Błąd podczas pobierania danych z API: &quot; + e.getMessage());</span>
+<span class="nc" id="L38">        }</span>
+<span class="nc" id="L39">        System.out.println();</span>
+
+<span class="nc" id="L41">        System.out.println(&quot;Lista wszystkich pracownikow:&quot;);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">        for (Employee employee : employeeService.getAllEmployees()) {</span>
+<span class="nc" id="L43">            System.out.printf(&quot;%s %s (%s) - %s, Pensja: %.2f%n&quot;,</span>
+<span class="nc" id="L44">                    employee.getFirstName(),</span>
+<span class="nc" id="L45">                    employee.getLastName(),</span>
+<span class="nc" id="L46">                    employee.getCompanyName(),</span>
+<span class="nc" id="L47">                    employee.getPosition(),</span>
+<span class="nc" id="L48">                    employee.getSalary());</span>
+<span class="nc" id="L49">        }</span>
+<span class="nc" id="L50">        System.out.println();</span>
+
+<span class="nc" id="L52">        System.out.println(&quot;Pracownicy z pensją poniżej stawki:&quot;);</span>
+<span class="nc" id="L53">        List&lt;Employee&gt; underpaidEmployees = employeeService.validateSalaryConsistency();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        for (Employee employee : underpaidEmployees) {</span>
+<span class="nc" id="L55">            System.out.printf(&quot;%s %s - aktualna pensja: %.2f, minimalna dla stanowiska %s: %.2f%n&quot;,</span>
+<span class="nc" id="L56">                    employee.getFirstName(),</span>
+<span class="nc" id="L57">                    employee.getLastName(),</span>
+<span class="nc" id="L58">                    employee.getSalary(),</span>
+<span class="nc" id="L59">                    employee.getPosition(),</span>
+<span class="nc" id="L60">                    employee.getPosition().getSalary());</span>
+<span class="nc" id="L61">        }</span>
+<span class="nc" id="L62">        System.out.println();</span>
+
+<span class="nc" id="L64">        System.out.println(&quot;Statystyki firm:&quot;);</span>
+<span class="nc" id="L65">        Map&lt;String, CompanyStatistics&gt; statistics = employeeService.getCompanyStatistics();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        for (Map.Entry&lt;String, CompanyStatistics&gt; entry : statistics.entrySet()) {</span>
+<span class="nc" id="L67">            System.out.println(&quot;Firma: &quot; + entry.getKey());</span>
+<span class="nc" id="L68">            System.out.println(entry.getValue());</span>
+<span class="nc" id="L69">            System.out.println();</span>
+<span class="nc" id="L70">        }</span>
+<span class="nc" id="L71">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

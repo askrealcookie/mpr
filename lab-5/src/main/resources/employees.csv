@@ -1,0 +1,12 @@
+firstName,lastName,email,company,position,salary
+Jan,Kowalski,jan.kowalski@firma.pl,TechCorp,Programista,9000
+Anna,Nowak,anna.nowak@firma.pl,DataSoft,Manager,15000
+Piotr,Wiśniewski,piotr.wisniewski@tech.com,TechCorp,Prezes,30000
+Katarzyna,Lewandowska,k.lewandowska@data.pl,DataSoft,Wiceprezes,20000
+Michał,Wójcik,m.wojcik@tech.com,TechCorp,Programista,7500
+Adam,Kowalczyk,adam.k@firma.pl,StartUp,Stazysta,3500
+Maria,Kamińska,zly-mail,DataSoft,Manager,13000
+,Zieliński,jan.zielinski@firma.pl,TechCorp,Programista,8500
+Robert,Szymański,robert.s@firma.pl,StartUp,NieistniejaceStanowisko,9000
+Tomasz,Woźniak,tomasz.w@tech.com,TechCorp,Programista,-1000
+Agnieszka,Dąbrowska,agnieszka.d@data.pl,DataSoft,Manager,blabla

@@ -5,8 +5,6 @@ import org.example.model.Position;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,27 +26,31 @@ class TeamServiceTest {
         teamService = new TeamService(3, 2);
     }
 
-    @ParameterizedTest
-    @CsvSource({
-            "Programista,Manager,true",
-            "Programista,Programista,false"
-    })
-    void shouldValidateTeamDiversity(String pos1, String pos2, boolean expectedValid) {
-        Employee e1 = emp("a@ex.com", Position.valueOf(pos1));
-        Employee e2 = emp("b@ex.com", Position.valueOf(pos2));
+    @Test
+    void shouldCreateTeamWithDifferentPositions() {
+        Employee e1 = emp("a@ex.com", Position.Programista);
+        Employee e2 = emp("b@ex.com", Position.Manager);
         List<Employee> list = new ArrayList<>();
         list.add(e1);
         list.add(e2);
 
-        if (expectedValid) {
-            ProjectTeam team = teamService.createTeam("T1" + pos1 + pos2, list);
-            assertThat(team.getMembers()).extracting(Employee::getPosition)
-                    .containsExactlyInAnyOrder(e1.getPosition(), e2.getPosition());
-        } else {
-            assertThatThrownBy(() -> teamService.createTeam("T1" + pos1 + pos2, list))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessageContaining("not enough different positions");
-        }
+        ProjectTeam team = teamService.createTeam("T1", list);
+
+        assertThat(team.getMembers()).extracting(Employee::getPosition)
+                .containsExactlyInAnyOrder(Position.Programista, Position.Manager);
+    }
+
+    @Test
+    void shouldNotCreateTeamWithSamePositions() {
+        Employee e1 = emp("a@ex.com", Position.Programista);
+        Employee e2 = emp("b@ex.com", Position.Programista);
+        List<Employee> list = new ArrayList<>();
+        list.add(e1);
+        list.add(e2);
+
+        assertThatThrownBy(() -> teamService.createTeam("T1", list))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("not enough different positions");
     }
 
     @Test

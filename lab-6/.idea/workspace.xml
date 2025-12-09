@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a79bcc76-ddeb-4b4d-8347-cf9f0672c492" name="Changes" comment="zad 4">
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/AssignmentRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/CalendarService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/CompetenceRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/DataFormatter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/ExportData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/FileWriter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/Logger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/Certificate.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/CertificateRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/Email.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/EmailService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/NotificationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/notification/NotificationServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/assignment/AssignmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/AssignmentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/export/ExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/export/ExportService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/assignment/AssignmentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/assignment/AssignmentServiceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/export/ExportServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/export/ExportServiceTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="a79bcc76-ddeb-4b4d-8347-cf9f0672c492" name="Changes" comment="zad 4" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -60,6 +40,7 @@
     "JUnit.EmployeeServiceTest.executor": "Run",
     "JUnit.EmployeeTest.executor": "Run",
     "JUnit.ExportServiceTest.executor": "Run",
+    "JUnit.NotificationServiceTest.executor": "Run",
     "JUnit.PositionTest.executor": "Run",
     "JUnit.PromotionServiceTest.executor": "Run",
     "JUnit.SeniorityServiceTest.executor": "Run",
@@ -74,6 +55,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",

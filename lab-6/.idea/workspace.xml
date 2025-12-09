@@ -5,7 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a79bcc76-ddeb-4b4d-8347-cf9f0672c492" name="Changes" comment="zad 4">
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/service/TeamServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/service/TeamServiceTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/AssignmentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/CalendarService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/CompetenceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/DataFormatter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/ExportData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/FileWriter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/export/Logger.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/Certificate.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/CertificateRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/Email.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/EmailService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/org/example/notification/NotificationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/org/example/notification/NotificationServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/assignment/AssignmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/assignment/AssignmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/export/ExportService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/export/ExportService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/assignment/AssignmentServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/assignment/AssignmentServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/export/ExportServiceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/export/ExportServiceTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,57 +53,73 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EmployeeRatingServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EmployeeServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.EmployeeTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PositionTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.PromotionServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SeniorityServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.SeniorityServiceTest.shouldFilterEmployeesBySeniorityRange.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TeamServiceTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TeamServiceTest.shouldNotMoveEmployeeWhenAlreadyInTargetTeam.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.example in mpr1.executor&quot;: &quot;Coverage&quot;,
-    &quot;JUnit.model in mpr1.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.service in mpr1.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.mpr1 [test].executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/kacperptak/IdeaProjects/mpr1/lab-5&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "JUnit.EmployeeRatingServiceTest.executor": "Run",
+    "JUnit.EmployeeServiceTest.executor": "Run",
+    "JUnit.EmployeeTest.executor": "Run",
+    "JUnit.ExportServiceTest.executor": "Run",
+    "JUnit.PositionTest.executor": "Run",
+    "JUnit.PromotionServiceTest.executor": "Run",
+    "JUnit.SeniorityServiceTest.executor": "Run",
+    "JUnit.SeniorityServiceTest.shouldFilterEmployeesBySeniorityRange.executor": "Run",
+    "JUnit.TeamServiceTest.executor": "Run",
+    "JUnit.TeamServiceTest.shouldNotMoveEmployeeWhenAlreadyInTargetTeam.executor": "Run",
+    "JUnit.example in mpr1.executor": "Coverage",
+    "JUnit.model in mpr1.executor": "Run",
+    "JUnit.service in mpr1.executor": "Run",
+    "Maven.mpr1 [test].executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultAutoModeForALLUsers.v1": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "main",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/kacperptak/IdeaProjects/mpr1/lab-5",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.TeamServiceTest">
-    <configuration name="EmployeeRatingServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.NotificationServiceTest">
+    <configuration name="ExportServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="mpr1" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="org.example.service.*" />
+          <option name="PATTERN" value="org.example.export.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="org.example.service" />
-      <option name="MAIN_CLASS_NAME" value="org.example.service.EmployeeRatingServiceTest" />
+      <option name="PACKAGE_NAME" value="org.example.export" />
+      <option name="MAIN_CLASS_NAME" value="org.example.export.ExportServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="NotificationServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="mpr1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.notification.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example.notification" />
+      <option name="MAIN_CLASS_NAME" value="org.example.notification.NotificationServiceTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -102,22 +136,6 @@
       <option name="PACKAGE_NAME" value="org.example.service" />
       <option name="MAIN_CLASS_NAME" value="org.example.service.SeniorityServiceTest" />
       <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SeniorityServiceTest.shouldFilterEmployeesBySeniorityRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="mpr1" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="org.example.service.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="org.example.service" />
-      <option name="MAIN_CLASS_NAME" value="org.example.service.SeniorityServiceTest" />
-      <option name="METHOD_NAME" value="shouldFilterEmployeesBySeniorityRange" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -166,11 +184,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.NotificationServiceTest" />
+        <item itemvalue="JUnit.ExportServiceTest" />
         <item itemvalue="JUnit.TeamServiceTest" />
         <item itemvalue="JUnit.TeamServiceTest.shouldNotMoveEmployeeWhenAlreadyInTargetTeam" />
         <item itemvalue="JUnit.SeniorityServiceTest" />
-        <item itemvalue="JUnit.SeniorityServiceTest.shouldFilterEmployeesBySeniorityRange" />
-        <item itemvalue="JUnit.EmployeeRatingServiceTest" />
       </list>
     </recent_temporary>
   </component>

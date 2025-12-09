@@ -1,31 +1,37 @@
 package org.example.export;
 
-import org.example.model.Employee;
-import org.example.service.EmployeeService;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.io.IOException;
 
 public class ExportService {
+    private final FileWriter fileWriter;
+    private final DataFormatter dataFormatter;
+    private final Logger logger;
 
-    private final EmployeeService employeeService;
-    private final EmployeeDataFormatter formatter;
-
-    public ExportService(EmployeeService employeeService, EmployeeDataFormatter formatter) {
-        this.employeeService = employeeService;
-        this.formatter = formatter;
+    public ExportService(FileWriter fileWriter, DataFormatter dataFormatter, Logger logger) {
+        this.fileWriter = fileWriter;
+        this.dataFormatter = dataFormatter;
+        this.logger = logger;
     }
 
-    public ExportResult exportEmployees(ExportRequest request) {
-        List<Employee> employees = employeeService.getAllEmployees();
+    public boolean export(ExportData data, String filename) {
+        String formattedContent = dataFormatter.format(data);
 
-        List<Employee> filtered = employees.stream()
-                .filter(e -> request.getPositionsCodes() == null || request.getPositionsCodes().isEmpty()
-                        || request.getPositionsCodes().contains(e.getPosition().name()))
-                .collect(Collectors.toList());
+        int maxRetries = 3;
+        for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            try {
+                fileWriter.write(filename, formattedContent);
+                return true;
+            } catch (IOException e) {
+                logger.error("Attempt " + attempt + " failed: " + e.getMessage());
 
-        String content = formatter.formatEmployees(filtered, request.getFormat());
-        return new ExportResult(content, request.getFormat(), LocalDateTime.now());
+                if (attempt == maxRetries) {
+                    logger.error("All retry attempts exhausted. Export failed.");
+                    return false;
+                }
+            }
+        }
+
+        return false;
     }
 }
+

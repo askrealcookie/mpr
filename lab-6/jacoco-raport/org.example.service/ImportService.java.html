@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ImportService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mpr1</a> &gt; <a href="index.source.html" class="el_package">org.example.service</a> &gt; <span class="el_source">ImportService.java</span></div><h1>ImportService.java</h1><pre class="source lang-java linenums">package org.example.service;
+
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvValidationException;
+import org.example.model.Employee;
+import org.example.model.Position;
+import org.example.model.ImportSummary;
+import org.example.exception.InvalidDataException;
+
+import java.io.FileReader;
+import java.io.IOException;
+
+public class ImportService {
+    private final EmployeeService employeeService;
+
+<span class="fc" id="L16">    public ImportService(EmployeeService employeeService) {</span>
+<span class="fc" id="L17">        this.employeeService = employeeService;</span>
+<span class="fc" id="L18">    }</span>
+
+    public ImportSummary importFromCsv(String filePath) {
+<span class="fc" id="L21">        int successfulImports = 0;</span>
+<span class="fc" id="L22">        ImportSummary summary = new ImportSummary(0);</span>
+        
+<span class="fc" id="L24">        try (CSVReader reader = new CSVReader(new FileReader(filePath))) {</span>
+<span class="fc" id="L25">            reader.readNext();</span>
+            
+            String[] nextLine;
+<span class="fc" id="L28">            int lineNumber = 1;</span>
+            
+<span class="fc bfc" id="L30" title="All 2 branches covered.">            while ((nextLine = reader.readNext()) != null) {</span>
+<span class="fc" id="L31">                lineNumber++;</span>
+<span class="pc bpc" id="L32" title="2 of 6 branches missed.">                if (nextLine.length == 0 || (nextLine.length == 1 &amp;&amp; nextLine[0].trim().isEmpty())) {</span>
+<span class="fc" id="L33">                    continue;</span>
+                }
+
+                try {
+<span class="fc" id="L37">                    Employee employee = parseRow(nextLine, lineNumber);</span>
+<span class="fc" id="L38">                    employeeService.addEmployee(employee);</span>
+<span class="fc" id="L39">                    successfulImports++;</span>
+<span class="fc" id="L40">                } catch (InvalidDataException e) {</span>
+<span class="fc" id="L41">                    summary.addError(e.getLineNumber(), e.getMessage());</span>
+<span class="fc" id="L42">                }</span>
+            }
+<span class="nc" id="L44">        } catch (IOException e) {</span>
+<span class="nc" id="L45">            summary.addError(0, &quot;Błąd odczytu pliku: &quot; + e.getMessage());</span>
+<span class="nc" id="L46">        } catch (CsvValidationException e) {</span>
+<span class="nc" id="L47">            summary.addError(0, &quot;Błąd parsowania CSV: &quot; + e.getMessage());</span>
+<span class="pc" id="L48">        }</span>
+
+<span class="fc" id="L50">        return summaryWithCount(summary, successfulImports);</span>
+    }
+
+    private Employee parseRow(String[] row, int lineNumber) throws InvalidDataException {
+<span class="pc bpc" id="L54" title="1 of 2 branches missed.">        if (row.length != 6) {</span>
+<span class="nc" id="L55">            throw new InvalidDataException(&quot;Niepoprawna liczba pól (oczekiwano 6, otrzymano &quot; + row.length + &quot;)&quot;, lineNumber);</span>
+        }
+
+<span class="fc" id="L58">        String firstName = row[0].trim();</span>
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if (firstName.isEmpty()) {</span>
+<span class="nc" id="L60">            throw new InvalidDataException(&quot;Imię nie może być puste&quot;, lineNumber);</span>
+        }
+
+<span class="fc" id="L63">        String lastName = row[1].trim();</span>
+<span class="pc bpc" id="L64" title="1 of 2 branches missed.">        if (lastName.isEmpty()) {</span>
+<span class="nc" id="L65">            throw new InvalidDataException(&quot;Nazwisko nie może być puste&quot;, lineNumber);</span>
+        }
+
+<span class="fc" id="L68">        String email = row[2].trim();</span>
+<span class="fc bfc" id="L69" title="All 2 branches covered.">        if (!email.contains(&quot;@&quot;)) {</span>
+<span class="fc" id="L70">            throw new InvalidDataException(&quot;Nieprawidłowy format e-maila&quot;, lineNumber);</span>
+        }
+
+<span class="fc" id="L73">        String company = row[3].trim();</span>
+<span class="pc bpc" id="L74" title="1 of 2 branches missed.">        if (company.isEmpty()) {</span>
+<span class="nc" id="L75">            throw new InvalidDataException(&quot;Nazwa firmy nie może być pusta&quot;, lineNumber);</span>
+        }
+
+        Position position;
+        try {
+<span class="fc" id="L80">            position = Position.valueOf(row[4].trim());</span>
+<span class="fc" id="L81">        } catch (IllegalArgumentException e) {</span>
+<span class="fc" id="L82">            throw new InvalidDataException(&quot;Nieprawidłowe stanowisko: &quot; + row[4], lineNumber);</span>
+<span class="fc" id="L83">        }</span>
+
+        double salary;
+        try {
+<span class="fc" id="L87">            salary = Double.parseDouble(row[5].trim());</span>
+<span class="pc bpc" id="L88" title="1 of 2 branches missed.">            if (salary &lt;= 0) {</span>
+<span class="nc" id="L89">                throw new InvalidDataException(&quot;Wynagrodzenie musi być dodatnie&quot;, lineNumber);</span>
+            }
+<span class="fc" id="L91">        } catch (NumberFormatException e) {</span>
+<span class="fc" id="L92">            throw new InvalidDataException(&quot;Nieprawidłowy format wynagrodzenia: &quot; + row[5], lineNumber);</span>
+<span class="fc" id="L93">        }</span>
+
+<span class="fc" id="L95">        return new Employee(firstName, lastName, email, company, position, salary);</span>
+    }
+
+    private ImportSummary summaryWithCount(ImportSummary base, int importedCount) {
+<span class="fc" id="L99">        ImportSummary result = new ImportSummary(importedCount);</span>
+<span class="fc bfc" id="L100" title="All 2 branches covered.">        for (ImportSummary.ImportError err : base.getErrors()) {</span>
+<span class="fc" id="L101">            result.addError(err.getLineNumber(), err.getMessage());</span>
+<span class="fc" id="L102">        }</span>
+<span class="fc" id="L103">        return result;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.11.202310140853</span></div></body></html>

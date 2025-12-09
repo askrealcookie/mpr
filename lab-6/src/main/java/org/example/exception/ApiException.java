@@ -1,0 +1,16 @@
+package org.example.exception;
+
+public class ApiException extends Exception {
+    public ApiException(String message) {
+        super(message);
+    }
+
+    public ApiException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    @Override
+    public String getMessage() {
+        return super.getMessage();
+    }
+}
